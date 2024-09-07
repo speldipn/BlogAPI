@@ -1,32 +1,50 @@
 import { Controller, Param, Body, Delete, Get, Post, Put } from '@nestjs/common';
+import { BlogService } from './blog.service';
 
 @Controller('blog')
 export class BlogController {
 
+  blogService: BlogService;
+
+  constructor() {
+    this.blogService = new BlogService();
+  }
+
   @Get()
-  getAllPosts() {
+  async getAllPosts() {
     console.log("get all posts");
+    const posts = await this.blogService.getAllPosts();
+    console.log(posts);
+    return posts;
   }
 
   @Post()
-  createPost(@Body() post: any) {
-    console.log("writing post");
+  async createPost(@Body() post: any) {
+    console.log(`write post`);
     console.log(post);
+    this.blogService.createPost(post);
+    return "success";
   }
 
   @Get('/:id')
-  getPost(@Param('id') id: string) {
-    console.log(`[id: ${id}] get post`);
+  async getPost(@Param('id') id: string) {
+    console.log(`get post: ${id}`);
+
+    const post = await this.blogService.getPost(id);
+    console.log(post);
+    return post;
   }
 
   @Delete('/:id')
-  deletePost() {
-    console.log("delete post");
+  deletePost(@Param('id') id: string) {
+    console.log(`delete post: ${id}`);
+    return "success";
   }
 
   @Put('/:id')
   updatePost(@Param('id') id: string, @Body() post: any) {
-    console.log(`[id: ${id}] update post`);
+    console.log(`update post: ${id}`);
     console.log(post);
+    return this.blogService.updatePost(id, post);
   }
 }
