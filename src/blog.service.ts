@@ -1,13 +1,20 @@
 import { PostDto } from './blog.model';
-import { BlogFileRepository, BlogRepository } from './blog.repository';
+import { BlogFileRepository } from './blog.repository';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class BlogService {
   posts = [];
-  blogRepository: BlogRepository;
 
-  constructor() {
-    this.blogRepository = new BlogFileRepository();
-  }
+  constructor(private blogRepository: BlogFileRepository) {}
+  /* Equal to below code */
+  /*
+    blogRepository: BlogRepository;
+
+    constructor(blogRepository: BlogFileRepository) {
+      this.blogRepository = new BlogFileRepository();
+    }
+  */
 
   getAllPosts() {
     return this.blogRepository.getAllPosts();

@@ -1,14 +1,12 @@
 import { Controller, Param, Body, Delete, Get, Post, Put } from '@nestjs/common';
 import { BlogService } from './blog.service';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 @Controller('blog')
 export class BlogController {
 
-  blogService: BlogService;
-
-  constructor() {
-    this.blogService = new BlogService();
-  }
+  constructor(private blogService: BlogService) {}
 
   @Get()
   async getAllPosts() {
