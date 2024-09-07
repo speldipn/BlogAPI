@@ -1,12 +1,18 @@
 import { PostDto } from './blog.model';
-import { BlogFileRepository } from './blog.repository';
+//import { BlogFileRepository } from './blog.repository';
+import { BlogMongoRepository } from './blog.repository';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class BlogService {
   posts = [];
 
-  constructor(private blogRepository: BlogFileRepository) {}
+  /* case1) use local persistance * /
+  /* constructor(private blogRepository: BlogFileRepository) {} */
+  
+  /* case2) use Monggo DB */
+  constructor(private blogRepository: BlogMongoRepository) {}
+
   /* Equal to below code */
   /*
     blogRepository: BlogRepository;
