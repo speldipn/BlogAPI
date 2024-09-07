@@ -1,6 +1,8 @@
 import { readFile, writeFile } from 'fs/promises';
 import { PostDto } from './blog.model';
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 export interface BlogRepository {
   getAllPosts(): Promise<PostDto[]>;
