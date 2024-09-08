@@ -1,16 +1,23 @@
-import { Controller, Param, Body, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Controller,
+  Param,
+  Body,
+  Delete,
+  Get,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 @Controller('blog')
 export class BlogController {
-
   constructor(private blogService: BlogService) {}
 
   @Get()
   async getAllPosts() {
-    console.log("get all posts");
+    console.log('get all posts');
     const posts = await this.blogService.getAllPosts();
     console.log(posts);
     return posts;
@@ -21,7 +28,7 @@ export class BlogController {
     console.log(`write post`);
     console.log(post);
     this.blogService.createPost(post);
-    return "success";
+    return 'success';
   }
 
   @Get('/:id')
@@ -36,7 +43,7 @@ export class BlogController {
   @Delete('/:id')
   deletePost(@Param('id') id: string) {
     console.log(`delete post: ${id}`);
-    return "success";
+    return 'success';
   }
 
   @Put('/:id')

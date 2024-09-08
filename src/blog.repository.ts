@@ -15,7 +15,6 @@ export interface BlogRepository {
 
 @Injectable()
 export class BlogFileRepository implements BlogRepository {
-
   FILE_NAME = './src/blog.data.json';
 
   async getAllPosts(): Promise<PostDto[]> {
@@ -54,8 +53,7 @@ export class BlogFileRepository implements BlogRepository {
 }
 
 @Injectable()
-export class BlogMongoRepository implements BlogRepository  {
-
+export class BlogMongoRepository implements BlogRepository {
   constructor(@InjectModel(Blog.name) private blogModel: Model<BlogDocument>) {}
 
   async getAllPosts(): Promise<PostDto[]> {

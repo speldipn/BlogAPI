@@ -5,7 +5,6 @@ export type BlogDocument = Blog & Document;
 
 @Schema()
 export class Blog {
-
   @Prop()
   id: string;
 
